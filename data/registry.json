@@ -1,0 +1,219 @@
+{
+  "packages": {
+    "api": {
+      "description": "业务接口层",
+      "releases": [
+        {
+          "version": "2.0.0",
+          "dependencies": {
+            "web": "^2",
+            "cache": "^2"
+          }
+        },
+        {
+          "version": "1.0.0",
+          "dependencies": {
+            "web": "^1"
+          }
+        }
+      ]
+    },
+    "auth": {
+      "description": "认证",
+      "releases": [
+        {
+          "version": "2.0.0",
+          "dependencies": {
+            "http": "^2",
+            "core": "^2"
+          }
+        },
+        {
+          "version": "1.4.0",
+          "dependencies": {
+            "http": "^1.8",
+            "core": "^1"
+          }
+        },
+        {
+          "version": "1.0.0",
+          "dependencies": {
+            "http": "^1",
+            "json": "^1"
+          }
+        }
+      ]
+    },
+    "cache": {
+      "description": "缓存",
+      "releases": [
+        {
+          "version": "2.0.0",
+          "dependencies": {
+            "core": "^2",
+            "json": "^2"
+          }
+        },
+        {
+          "version": "1.0.0",
+          "dependencies": {
+            "core": "^1"
+          }
+        }
+      ]
+    },
+    "core": {
+      "description": "基础设施",
+      "releases": [
+        {
+          "version": "2.0.0"
+        },
+        {
+          "version": "1.4.0"
+        },
+        {
+          "version": "1.0.0"
+        }
+      ]
+    },
+    "crypto": {
+      "description": "加解密",
+      "releases": [
+        {
+          "version": "2.0.0",
+          "dependencies": {
+            "tls": "^2"
+          }
+        },
+        {
+          "version": "1.2.0",
+          "dependencies": {
+            "tls": "^1"
+          }
+        },
+        {
+          "version": "1.0.0"
+        }
+      ]
+    },
+    "http": {
+      "description": "HTTP 客户端",
+      "releases": [
+        {
+          "version": "2.1.0",
+          "dependencies": {
+            "tls": "^2"
+          }
+        },
+        {
+          "version": "2.0.0",
+          "dependencies": {
+            "tls": "^2"
+          }
+        },
+        {
+          "version": "1.9.0",
+          "yanked": true
+        },
+        {
+          "version": "1.8.0"
+        },
+        {
+          "version": "1.4.0"
+        },
+        {
+          "version": "1.0.0"
+        }
+      ]
+    },
+    "json": {
+      "description": "序列化",
+      "releases": [
+        {
+          "version": "2.0.0"
+        },
+        {
+          "version": "1.2.0"
+        },
+        {
+          "version": "1.0.0"
+        }
+      ]
+    },
+    "log": {
+      "description": "日志",
+      "releases": [
+        {
+          "version": "2.0.0"
+        },
+        {
+          "version": "1.2.0"
+        },
+        {
+          "version": "1.0.0"
+        }
+      ]
+    },
+    "metrics": {
+      "description": "指标采集",
+      "releases": [
+        {
+          "version": "2.0.0",
+          "dependencies": {
+            "log": "^2"
+          }
+        },
+        {
+          "version": "1.0.0",
+          "dependencies": {
+            "log": "^1"
+          }
+        }
+      ]
+    },
+    "tls": {
+      "description": "传输层安全",
+      "releases": [
+        {
+          "version": "2.1.0-rc.1"
+        },
+        {
+          "version": "2.0.0"
+        },
+        {
+          "version": "1.6.0"
+        },
+        {
+          "version": "1.0.0"
+        }
+      ]
+    },
+    "web": {
+      "description": "Web 框架",
+      "releases": [
+        {
+          "version": "2.1.0",
+          "dependencies": {
+            "http": "^2",
+            "auth": "^2",
+            "tls": "^2"
+          }
+        },
+        {
+          "version": "2.0.0",
+          "dependencies": {
+            "http": "^2",
+            "auth": "^2"
+          }
+        },
+        {
+          "version": "1.0.0",
+          "dependencies": {
+            "http": "^1",
+            "log": "^1"
+          }
+        }
+      ]
+    }
+  }
+}

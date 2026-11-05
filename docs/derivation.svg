@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" role="img" aria-label="Ravel 的求解流水线，以及一次无解的推导树">
+  <title>Ravel：一次无解是怎么被推出来的</title>
+  <desc>上半部分是从需求到人话的五步流水线；下半部分是 web ^2.0 与 http ^1.0 这组需求的推导树，末梢是五条事实，中间四个节点由它们两两合出来。</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8c959f"/>
+    </marker>
+  </defs>
+
+  <rect x="0.5" y="0.5" width="999" height="559" rx="14" fill="#ffffff" stroke="#d0d7de"/>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', 'PingFang SC', sans-serif">
+    <text x="34" y="46" font-size="20" font-weight="700" fill="#1f2328">一次「装不上」是怎么被推出来的</text>
+    <text x="34" y="72" font-size="13" fill="#57606a">需求 web ^2.0 + http ^1.0 · 内置示例生态 · 下图取自 ravel explain --tree</text>
+
+    <!-- 流水线 -->
+    <g>
+      <rect x="34" y="96" width="168" height="52" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+      <text x="118" y="118" font-size="12.5" font-weight="600" fill="#1f2328" text-anchor="middle">需求文本</text>
+      <text x="118" y="136" font-size="11.5" fill="#57606a" text-anchor="middle">web ^2.0</text>
+    </g>
+    <line x1="206" y1="122" x2="224" y2="122" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+    <g>
+      <rect x="228" y="96" width="168" height="52" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+      <text x="312" y="118" font-size="12.5" font-weight="600" fill="#1f2328" text-anchor="middle">版本区间</text>
+      <text x="312" y="136" font-size="11.5" fill="#57606a" text-anchor="middle">若干区间的并集</text>
+    </g>
+    <line x1="400" y1="122" x2="418" y2="122" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+    <g>
+      <rect x="422" y="96" width="168" height="52" rx="8" fill="#eef4ff" stroke="#a9c1f5"/>
+      <text x="506" y="118" font-size="12.5" font-weight="600" fill="#1f2328" text-anchor="middle">PubGrub 四步</text>
+      <text x="506" y="136" font-size="11.5" fill="#57606a" text-anchor="middle">传播 · 决策 · 消解</text>
+    </g>
+    <line x1="594" y1="122" x2="612" y2="122" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+    <g>
+      <rect x="616" y="96" width="168" height="52" rx="8" fill="#fff6e5" stroke="#e6c07b"/>
+      <text x="700" y="118" font-size="12.5" font-weight="600" fill="#1f2328" text-anchor="middle">推导树</text>
+      <text x="700" y="136" font-size="11.5" fill="#57606a" text-anchor="middle">每条都有出处</text>
+    </g>
+    <line x1="788" y1="122" x2="806" y2="122" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+    <g>
+      <rect x="810" y="96" width="156" height="52" rx="8" fill="#eaf7ee" stroke="#94d3a2"/>
+      <text x="888" y="118" font-size="12.5" font-weight="600" fill="#1f2328" text-anchor="middle">人话</text>
+      <text x="888" y="136" font-size="11.5" fill="#57606a" text-anchor="middle">ravel explain</text>
+    </g>
+  </g>
+
+  <line x1="34" y1="172" x2="966" y2="172" stroke="#eaeef2"/>
+
+  <!-- 推导树 -->
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace" font-size="12.5" xml:space="preserve">
+    <text x="34" y="202" fill="#cf222e" font-weight="700">无解</text>
+    <text x="34" y="228" fill="#3d444d">├─ web 在 ^2 里 不能同时成立</text>
+    <text x="34" y="254" fill="#3d444d">│  ├─ http 不在 ^2 里、web 在 ^2 里 不能同时成立</text>
+    <text x="34" y="280" fill="#3d444d">│  │  ├─ http 不在 ^2 里、web 在 &gt;=2.0.0, &lt;2.1.0 或 &gt;2.1.0, &lt;3.0.0 里 不能同时成立</text>
+    <text x="34" y="306" fill="#1f6feb">│  │  │  ├─ web 在 &gt;2.0.0, &lt;2.1.0 或 &gt;2.1.0, &lt;3.0.0 里没有可用版本</text>
+    <text x="34" y="332" fill="#1f6feb">│  │  │  └─ web 2.0.0 依赖 http ^2</text>
+    <text x="34" y="358" fill="#1f6feb">│  │  └─ web 2.1.0 依赖 http ^2</text>
+    <text x="34" y="384" fill="#1f6feb">│  └─ 项目要求 http ^1.0</text>
+    <text x="34" y="410" fill="#1f6feb">└─ 项目要求 web ^2.0</text>
+  </g>
+
+  <line x1="34" y1="434" x2="966" y2="434" stroke="#eaeef2"/>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', 'PingFang SC', sans-serif" font-size="12.5">
+    <circle cx="42" cy="460" r="5" fill="#1f6feb"/>
+    <text x="58" y="464" fill="#1f2328">蓝色是事实：谁依赖谁、哪个区间里一个可用版本都没有</text>
+    <circle cx="42" cy="486" r="5" fill="#57606a"/>
+    <text x="58" y="490" fill="#1f2328">灰色是结论：由两条前提合起来得到，所以一路都能追到事实</text>
+    <circle cx="42" cy="512" r="5" fill="#cf222e"/>
+    <text x="58" y="516" fill="#1f2328">根节点只说明「没有一组版本能满足」，原因全在下面两层</text>
+  </g>
+
+  <text x="34" y="542" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', 'PingFang SC', sans-serif" font-size="12" fill="#57606a">5 条事实、4 次消解、2 条根需求；求解器在这台机器上平均 0.4 毫秒算完，剩下的活是把话说清楚。</text>
+</svg>
