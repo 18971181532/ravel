@@ -3,6 +3,8 @@
 import io
 import json
 import os
+import subprocess
+import sys
 import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
@@ -260,6 +262,34 @@ class LockTests(Runner):
             self.assertIn("没有", out)
         finally:
             os.unlink(other)
+
+
+class ConsoleEncodingTests(unittest.TestCase):
+    """英文 Windows 的控制台是 cp1252，中文一写就 UnicodeEncodeError。"""
+
+    def test_runs_under_a_non_utf8_console(self):
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        env = dict(os.environ, PYTHONIOENCODING="cp1252")
+        env.pop("PYTHONUTF8", None)
+        proc = subprocess.run(
+            [sys.executable, "-m", "ravel", "solve", "web ^1.0"],
+            cwd=root, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        )
+        stderr = proc.stderr.decode("utf-8", "replace")
+        self.assertEqual(proc.returncode, 0, stderr)
+        self.assertNotIn("UnicodeEncodeError", stderr)
+        self.assertIn("web", proc.stdout.decode("utf-8", "replace"))
+
+    def test_explain_also_survives(self):
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        env = dict(os.environ, PYTHONIOENCODING="cp1252")
+        env.pop("PYTHONUTF8", None)
+        proc = subprocess.run(
+            [sys.executable, "-m", "ravel", "explain", "web ^2.0", "http ^1.0"],
+            cwd=root, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        )
+        self.assertEqual(proc.returncode, 1, proc.stderr.decode("utf-8", "replace"))
+        self.assertIn("结论", proc.stdout.decode("utf-8", "replace"))
 
 
 if __name__ == "__main__":  # pragma: no cover

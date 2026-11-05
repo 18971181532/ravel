@@ -11,6 +11,7 @@
 
 from __future__ import annotations
 
+import sys
 import unicodedata
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Sequence, Tuple
@@ -21,6 +22,26 @@ from .terms import Term
 from .versions import Version, VersionRange, format_constraint
 
 MAX_REASONS = 2
+
+
+def use_utf8_stdout() -> None:
+    """把输出流换成 UTF-8。
+
+    Windows 的控制台编码跟着系统语言走：英文系统是 cp1252，一输出中文就
+    UnicodeEncodeError。测试里两个流被换成了 StringIO（没有 reconfigure），
+    所以这里只管真实的终端和管道。
+    """
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is None:
+            continue
+        encoding = (getattr(stream, "encoding", "") or "").replace("-", "").lower()
+        if encoding == "utf8":
+            continue
+        try:
+            reconfigure(encoding="utf-8")
+        except (ValueError, OSError):  # pragma: no cover - 流已关闭之类
+            pass
 
 
 def display_width(text: str) -> int:

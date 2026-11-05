@@ -31,7 +31,8 @@ from .lock import DEFAULT_PATH as DEFAULT_LOCK
 from .lock import check as check_lock
 from .lock import from_solution, load as load_lock, save as save_lock
 from .registry import Registry, Requirement, parse_requirements
-from .report import display_width, pad, render as render_solution, why as why_package
+from .report import display_width, pad, render as render_solution
+from .report import use_utf8_stdout, why as why_package
 from .solver import SolveFailure, Solver
 from .versions import VersionRange
 
@@ -324,6 +325,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
+    use_utf8_stdout()
     parser = build_parser()
     args = parser.parse_args(argv)
     handler = getattr(args, "handler", None)

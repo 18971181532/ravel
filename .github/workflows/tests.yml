@@ -41,4 +41,8 @@ jobs:
       - run: python -m pip install dist/*.whl
       - run: ravel --version
       - run: ravel solve "web ^1.0" "metrics ^1.0"
-      - run: ravel explain "web ^2.0" "http ^1.0"
+      - name: 无解时把原因讲出来（退出码 1 是预期结果，不是失败）
+        run: |
+          set +e
+          ravel explain "web ^2.0" "http ^1.0"
+          test $? -eq 1

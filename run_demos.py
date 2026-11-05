@@ -16,6 +16,7 @@ from ravel import samples                                    # noqa: E402
 from ravel.explain import explain                            # noqa: E402
 from ravel.registry import parse_requirements                # noqa: E402
 from ravel.report import render as render_report             # noqa: E402
+from ravel.report import use_utf8_stdout                     # noqa: E402
 from ravel.solver import SolveFailure, Solver                 # noqa: E402
 
 WIDTH = 72
@@ -26,6 +27,7 @@ def rule(char="="):
 
 
 def main() -> int:
+    use_utf8_stdout()
     registry = samples.build()
     print(rule())
     print("Ravel 演示：一个会把「为什么装不上」讲出来的依赖求解器")

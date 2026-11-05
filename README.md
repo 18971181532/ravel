@@ -339,17 +339,17 @@ tls 2.1.0-rc.1   # 点名了就装
 | --- | --- | --- |
 | `ravel/versions.py` | SemVer 版本号、区间、区间代数、约束语法 | 622 |
 | `ravel/solver.py` | PubGrub 四步、部分解、统计 | 473 |
-| `ravel/cli.py` | 八个子命令、参数、退出码 | 341 |
+| `ravel/cli.py` | 八个子命令、参数、退出码 | 343 |
 | `ravel/explain.py` | 推导树 → 人话（列表与树两种画法）、放宽建议 | 277 |
 | `ravel/registry.py` | registry 与需求文件的加载、校验、报错定位 | 253 |
-| `ravel/report.py` | 有解时的表格、`why` 的每一节 | 206 |
+| `ravel/report.py` | 有解时的表格、`why` 的每一节 | 227 |
 | `ravel/lock.py` | 锁文件的读写与核对 | 186 |
 | `ravel/samples.py` | 内置生态、6 个场景、合成生态生成器 | 169 |
 | `ravel/terms.py` | 项、不相容、三种来源 | 161 |
 | `ravel/errors.py` | 错误类型与「脱字符」渲染 | 45 |
 | `ravel/__init__.py` / `__main__.py` | 对外 API 与 `python -m ravel` | 55 |
 
-实现 12 个模块共 2,788 行；测试 9 个文件共 2,221 行。
+实现 12 个模块共 2,811 行；测试 9 个文件共 2,251 行。
 
 ## 目录结构
 
@@ -368,14 +368,14 @@ ravel/
 │   ├── cli.py              #   命令行
 │   ├── __init__.py         #   对外 API
 │   └── __main__.py         #   python -m ravel
-├── tests/                  # 9 个测试文件，355 个用例
+├── tests/                  # 9 个测试文件，357 个用例
 │   ├── test_versions.py    #   77 个：版本排序、区间代数、约束语法
 │   ├── test_solver.py      #   60 个：场景、回退、预发布、失败、部分解
 │   ├── test_registry.py    #   43 个：加载与报错定位
 │   ├── test_report.py      #   37 个：表格、备注、why
 │   ├── test_lock.py        #   34 个：锁文件读写与核对
 │   ├── test_terms.py       #   33 个：项与不相容
-│   ├── test_cli.py         #   32 个：八个子命令与退出码
+│   ├── test_cli.py         #   34 个：八个子命令、退出码、非 UTF-8 控制台
 │   ├── test_explain.py     #   25 个：编号自洽、措辞、建议
 │   └── test_property.py    #   14 个：暴力对拍 + 区间代数定律
 ├── data/
@@ -396,11 +396,11 @@ ravel/
 
 ```bash
 $ python run_tests.py
-Ran 355 tests in 0.33s
+Ran 357 tests in 1.50s
 OK
 ```
 
-355 个用例、9 个文件、约 0.4 秒。四类：
+357 个用例、9 个文件、约 1.5 秒（两个用例要真起子进程）。四类：
 
 - **单元**：版本排序、区间代数、约束语法、项与不相容、部分解的每条语义。
 - **场景**：6 个内置场景逐个断言（包括「回退真的发生了」`backtracks > 0`、撤回的版本绝不被选中、预发布没点名就不装）。
